@@ -23,7 +23,7 @@ class MockData {
             DirectionItems(direction: "PM")
         ]
     
-    private let textOneHeader = "Работай"
+    private let textOneHeader = "Работай Работай Работай Работай Работай Работай Работай Работай Работай Работай Работай Работай"
     private let textTwoHeader = "Получай"
     
     

@@ -19,6 +19,7 @@ class SectionHeaderForOneRow: UICollectionReusableView {
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .gray
+        label.numberOfLines = 0
         return label
     }()
     
@@ -29,7 +30,7 @@ class SectionHeaderForOneRow: UICollectionReusableView {
         setupConstraints()
     }
     
-    func configHeader(textHeader: String) {
+    func configHeader(textHeader: String?) {
         headerLabel.text = textHeader
     }
     
@@ -41,8 +42,10 @@ class SectionHeaderForOneRow: UICollectionReusableView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            headerLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
+            headerLabel.topAnchor.constraint(equalTo: topAnchor),
+            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            headerLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            headerLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     
