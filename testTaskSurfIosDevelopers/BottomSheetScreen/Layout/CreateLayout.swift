@@ -17,10 +17,8 @@ final class CreateLayout {
             
             switch section.type {
             case "OneRow":
-                print("1")
                 return self.createOneRowSection()
             default:
-                print("2")
                 return self.createTwoRowSection()
             }
         }
@@ -36,7 +34,7 @@ final class CreateLayout {
     private func createOneRowSection() -> NSCollectionLayoutSection {
         
         let estimatedHeight: CGFloat = 24
-        let estimatedWidth: CGFloat = 1
+        let estimatedWidth: CGFloat = 55
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(estimatedWidth),
                                               heightDimension: .estimated(estimatedHeight))

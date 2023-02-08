@@ -12,7 +12,7 @@ struct SectionModel: Hashable {
     //let id = UUID()
     let type: String
     let title: String
-    let items: [DirectionItems]
+    var items: [DirectionItems]
 }
 
 

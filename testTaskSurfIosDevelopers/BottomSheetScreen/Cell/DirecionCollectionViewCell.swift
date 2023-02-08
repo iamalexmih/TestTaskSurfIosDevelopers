@@ -18,12 +18,16 @@ final class DirecionCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                backgroundColor = UIColor(named: "colorDark")
-                label.textColor = .white
+                if label.textColor == .white {
+                    backgroundColor = UIColor(named: "colorCell")
+                    label.textColor = .black
+                } else {
+                    backgroundColor = UIColor(named: "colorDark")
+                    label.textColor = .white
+                }
             } else {
                 backgroundColor = UIColor(named: "colorCell")
                 label.textColor = .black

@@ -14,22 +14,30 @@ class MockData {
     private init() { }
     
     
-    private let directionItems: [DirectionItems] =  [
+    private var directionItems: [DirectionItems] =  [
             DirectionItems(direction: "IOS"),
             DirectionItems(direction: "Android"),
             DirectionItems(direction: "Design"),
             DirectionItems(direction: "QA"),
             DirectionItems(direction: "Flutter"),
-            DirectionItems(direction: "PM")
+            DirectionItems(direction: "Java"),
+            DirectionItems(direction: "Python"),
+            DirectionItems(direction: "Database (SQL)"),
+            DirectionItems(direction: "php"),
+            DirectionItems(direction: "DevOps")
         ]
     
-    private let directionItemsTwo: [DirectionItems] =  [
+    private var directionItemsTwo: [DirectionItems] =  [
         DirectionItems(direction: "IOS"),
         DirectionItems(direction: "Android"),
         DirectionItems(direction: "Design"),
         DirectionItems(direction: "QA"),
         DirectionItems(direction: "Flutter"),
-        DirectionItems(direction: "PM")
+        DirectionItems(direction: "Java"),
+        DirectionItems(direction: "Python"),
+        DirectionItems(direction: "Database (SQL)"),
+        DirectionItems(direction: "php"),
+        DirectionItems(direction: "DevOps")
     ]
     
     private let textOneHeader = "Работай над реальными задачами под руководством опытного наставника и получи возможность стать частью команды мечты."
@@ -37,8 +45,8 @@ class MockData {
     
     
     func getSections() -> [SectionModel] {
-        let oneSection = SectionModel(type: "OneRow", title: textOneHeader, items: directionItems)
-        let twoSection = SectionModel(type: "TwoRows", title: textTwoHeader, items: directionItemsTwo)
+        var oneSection = SectionModel(type: "OneRow", title: textOneHeader, items: directionItems)
+        var twoSection = SectionModel(type: "TwoRows", title: textTwoHeader, items: directionItemsTwo)
         
         return [oneSection, twoSection]
     }
