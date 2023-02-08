@@ -23,13 +23,22 @@ class MockData {
             DirectionItems(direction: "PM")
         ]
     
-    private let textOneHeader = "Работай Работай Работай Работай Работай Работай Работай Работай Работай Работай Работай Работай"
-    private let textTwoHeader = "Получай"
+    private let directionItemsTwo: [DirectionItems] =  [
+        DirectionItems(direction: "IOS"),
+        DirectionItems(direction: "Android"),
+        DirectionItems(direction: "Design"),
+        DirectionItems(direction: "QA"),
+        DirectionItems(direction: "Flutter"),
+        DirectionItems(direction: "PM")
+    ]
+    
+    private let textOneHeader = "Работай над реальными задачами под руководством опытного наставника и получи возможность стать частью команды мечты."
+    private let textTwoHeader = "Получай стипендию, выстраивай удобный график, работай на современном железе."
     
     
     func getSections() -> [SectionModel] {
         let oneSection = SectionModel(type: "OneRow", title: textOneHeader, items: directionItems)
-        let twoSection = SectionModel(type: "TwoRows", title: textTwoHeader, items: directionItems)
+        let twoSection = SectionModel(type: "TwoRows", title: textTwoHeader, items: directionItemsTwo)
         
         return [oneSection, twoSection]
     }

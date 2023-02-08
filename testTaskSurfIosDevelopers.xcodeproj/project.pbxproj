@@ -70,7 +70,7 @@
 			children = (
 				B58396BB299111310046C484 /* AppDelegate.swift */,
 				B58396BD299111310046C484 /* SceneDelegate.swift */,
-				B58396D3299112250046C484 /* Main Screen */,
+				B58396D3299112250046C484 /* BottomSheetScreen */,
 				B58396D5299117D40046C484 /* MockData.swift */,
 				B58396DD29911D820046C484 /* Extension */,
 				B58396D42991123D0046C484 /* Resources */,
@@ -78,7 +78,7 @@
 			path = testTaskSurfIosDevelopers;
 			sourceTree = "<group>";
 		};
-		B58396D3299112250046C484 /* Main Screen */ = {
+		B58396D3299112250046C484 /* BottomSheetScreen */ = {
 			isa = PBXGroup;
 			children = (
 				B58396DA29911C8F0046C484 /* Cell */,
@@ -87,7 +87,7 @@
 				B58396CF2991121A0046C484 /* Presenter.swift */,
 				B58396D12991121F0046C484 /* Model.swift */,
 			);
-			path = "Main Screen";
+			path = BottomSheetScreen;
 			sourceTree = "<group>";
 		};
 		B58396D42991123D0046C484 /* Resources */ = {

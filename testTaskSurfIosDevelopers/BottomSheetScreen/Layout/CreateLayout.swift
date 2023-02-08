@@ -16,15 +16,17 @@ final class CreateLayout {
             let section = MockData.shared.getSections()[sectionIndex]
             
             switch section.type {
-//            case "TwoRows":
-//                return self.createTwoRowSection()
-            default:
+            case "OneRow":
+                print("1")
                 return self.createOneRowSection()
+            default:
+                print("2")
+                return self.createTwoRowSection()
             }
         }
         
         let config = UICollectionViewCompositionalLayoutConfiguration()
-//        config.interSectionSpacing = 0
+        config.interSectionSpacing = 24
         let layout = UICollectionViewCompositionalLayout(sectionProvider: sectionProvider,
                                                          configuration: config)
         return layout
@@ -33,7 +35,7 @@ final class CreateLayout {
     
     private func createOneRowSection() -> NSCollectionLayoutSection {
         
-        let estimatedHeight: CGFloat = 1
+        let estimatedHeight: CGFloat = 24
         let estimatedWidth: CGFloat = 1
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(estimatedWidth),
@@ -44,12 +46,40 @@ final class CreateLayout {
                                                        subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0,
+        section.contentInsets = NSDirectionalEdgeInsets(top: 12,
                                                         leading: 20,
                                                         bottom: 0,
                                                         trailing: 0)
         section.orthogonalScrollingBehavior = .continuous
-        section.interGroupSpacing = 20
+        section.interGroupSpacing = 12
+        
+        let header = createSectionHeader()
+        section.boundarySupplementaryItems = [header]
+        
+        return section
+    }
+    
+    private func createTwoRowSection() -> NSCollectionLayoutSection {
+        
+        let estimatedHeight: CGFloat = 1
+        let estimatedWidth: CGFloat = 1
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(estimatedWidth),
+                                              heightDimension: .estimated(estimatedHeight))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1),
+                                                                         heightDimension: .estimated(100)),
+                                                       subitems: [item])
+        group.interItemSpacing = .fixed(12)
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 12,
+                                                        leading: 20,
+                                                        bottom: 0,
+                                                        trailing: 0)
+        section.orthogonalScrollingBehavior = .none
+        section.interGroupSpacing = 12
         
         let header = createSectionHeader()
         section.boundarySupplementaryItems = [header]
@@ -67,7 +97,7 @@ final class CreateLayout {
             alignment: .top)
         
         layoutSectionHeader.contentInsets = NSDirectionalEdgeInsets(top: 0,
-                                                                     leading: 24,
+                                                                     leading: 0,
                                                                      bottom: 0,
                                                                      trailing: 12)
         return layoutSectionHeader

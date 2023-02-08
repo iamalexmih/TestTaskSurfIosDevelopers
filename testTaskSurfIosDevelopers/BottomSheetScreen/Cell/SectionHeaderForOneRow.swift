@@ -17,9 +17,10 @@ class SectionHeaderForOneRow: UICollectionReusableView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "header"
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .gray
         label.numberOfLines = 0
+        label.textAlignment = .left
         return label
     }()
     

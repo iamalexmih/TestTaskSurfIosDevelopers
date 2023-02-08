@@ -9,6 +9,7 @@ import Foundation
 
 
 struct SectionModel: Hashable {
+    //let id = UUID()
     let type: String
     let title: String
     let items: [DirectionItems]
@@ -17,7 +18,12 @@ struct SectionModel: Hashable {
 
 
 struct DirectionItems: Hashable {
+    let id = UUID()
     let direction: String
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
 
 
