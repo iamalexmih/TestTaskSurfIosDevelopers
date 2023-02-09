@@ -131,7 +131,7 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
     
     func setupCollectionView() {
         collectionView = UICollectionView(frame: .zero,
-                                          collectionViewLayout: createLayout.createCompositionalLayout())
+                                          collectionViewLayout: createLayout.createCompositionalLayout(isLarge: false))
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .white
         

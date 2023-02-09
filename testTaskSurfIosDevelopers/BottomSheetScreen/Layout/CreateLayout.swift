@@ -9,7 +9,7 @@ import UIKit
 
 
 final class CreateLayout {
-    func createCompositionalLayout() -> UICollectionViewLayout {
+    func createCompositionalLayout(isLarge: Bool) -> UICollectionViewLayout {
         let sectionProvider = { [weak self]
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
@@ -20,7 +20,11 @@ final class CreateLayout {
             case "OneRow":
                 return self.createOneRowSection()
             default:
-                return self.createTwoRowSection()
+                if isLarge {
+                    return self.createSectionList()
+                } else {
+                    return self.createTwoRowSection()
+                }
             }
         }
         
@@ -58,7 +62,7 @@ final class CreateLayout {
         return section
     }
     
-    private func createTwoRowSection() -> NSCollectionLayoutSection {
+    private func createSectionList() -> NSCollectionLayoutSection {
         
         let estimatedHeight: CGFloat = 24
         let estimatedWidth: CGFloat = 55
@@ -86,7 +90,7 @@ final class CreateLayout {
         return section
     }
     
-    private func createTwoRowSectionList() -> NSCollectionLayoutSection {
+    private func createTwoRowSection() -> NSCollectionLayoutSection {
         let estimatedHeight: CGFloat = 24
         let estimatedWidth: CGFloat = 55
         
