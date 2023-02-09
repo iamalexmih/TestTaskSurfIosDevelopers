@@ -71,7 +71,7 @@ final class CreateLayout {
                                               heightDimension: .estimated(estimatedHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .estimated(1),
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                                          heightDimension: .estimated(100)),
                                                        subitems: [item])
         group.interItemSpacing = .fixed(12)
