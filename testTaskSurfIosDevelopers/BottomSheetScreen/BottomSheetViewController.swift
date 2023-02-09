@@ -82,10 +82,11 @@ class BottomSheetViewController: UIViewController {
         collectionView.scrollToItem(at: indexForReverseScroll, at: .left, animated: false)
     }
     
-//    override func viewWillLayoutSubviews() {
-//        print(view.frame.height)
-//        print(view.window?.windowScene?.screen.bounds.height ?? 100)
-//    }
+    override func viewWillLayoutSubviews() {
+        
+        collectionView.collectionViewLayout = createLayout.createCompositionalLayout(isLarge: true)
+        
+    }
 }
 
 

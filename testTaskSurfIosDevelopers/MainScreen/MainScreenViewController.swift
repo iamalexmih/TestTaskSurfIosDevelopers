@@ -30,13 +30,13 @@ class MainScreenViewController: UIViewController {
         let navVC = UINavigationController(rootViewController: sheetView)
         navVC.isModalInPresentation = true
         
-        let smallId = UISheetPresentationController.Detent.Identifier("small")
-        let smallDetent = UISheetPresentationController.Detent.custom(identifier: smallId) { context in
+//        let smallId = UISheetPresentationController.Detent.Identifier("small")
+        let smallDetent = UISheetPresentationController.Detent.custom(identifier: .smallId) { context in
            return 270
         }
         
-        let mediumId = UISheetPresentationController.Detent.Identifier("medium")
-        let mediumDetent = UISheetPresentationController.Detent.custom(identifier: mediumId) { context in
+//        let mediumId = UISheetPresentationController.Detent.Identifier("medium")
+        let mediumDetent = UISheetPresentationController.Detent.custom(identifier: .mediumId) { context in
            return 450
         }
         
@@ -46,12 +46,25 @@ class MainScreenViewController: UIViewController {
             sheet.preferredCornerRadius = 32
             sheet.detents = [smallDetent , mediumDetent, .large()]
             sheet.largestUndimmedDetentIdentifier = .large
+            sheet.delegate = self
         }
         
         navigationController?.present(navVC, animated: true)
     }
-
 }
+
+extension MainScreenViewController: UISheetPresentationControllerDelegate {
+    func sheetPresentationControllerDidChangeSelectedDetentIdentifier(_ sheetPresentationController: UISheetPresentationController) {
+        if sheetPresentationController.selectedDetentIdentifier == .large {
+            SelectedDetent.current = .large
+        } else if sheetPresentationController.selectedDetentIdentifier == .mediumId {
+            SelectedDetent.current = .mediumId
+        } else {
+            SelectedDetent.current = .smallId
+        }
+    }
+}
+
 
 
 extension MainScreenViewController {

@@ -20,6 +20,8 @@
 		B5A5A73B299133F000F710A3 /* CreateLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5A73A299133F000F710A3 /* CreateLayout.swift */; };
 		B5A5A73D299173FF00F710A3 /* SectionHeaderForOneRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5A73C299173FF00F710A3 /* SectionHeaderForOneRow.swift */; };
 		B5D039852993B95A00C55E4E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D039842993B95A00C55E4E /* MainScreenViewController.swift */; };
+		B5D039892995384E00C55E4E /* Ext SheetPresentation + Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D039882995384E00C55E4E /* Ext SheetPresentation + Identifier.swift */; };
+		B5D0398C2995394D00C55E4E /* SelectedDetent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D0398B2995394D00C55E4E /* SelectedDetent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		B5A5A73A299133F000F710A3 /* CreateLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLayout.swift; sourceTree = "<group>"; };
 		B5A5A73C299173FF00F710A3 /* SectionHeaderForOneRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderForOneRow.swift; sourceTree = "<group>"; };
 		B5D039842993B95A00C55E4E /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
+		B5D039882995384E00C55E4E /* Ext SheetPresentation + Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext SheetPresentation + Identifier.swift"; sourceTree = "<group>"; };
+		B5D0398B2995394D00C55E4E /* SelectedDetent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedDetent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,7 @@
 				B58396BD299111310046C484 /* SceneDelegate.swift */,
 				B58396D3299112250046C484 /* BottomSheetScreen */,
 				B58396D5299117D40046C484 /* MockData.swift */,
+				B5D0398B2995394D00C55E4E /* SelectedDetent.swift */,
 				B5D039832993B94500C55E4E /* MainScreen */,
 				B58396DD29911D820046C484 /* Extension */,
 				B58396D42991123D0046C484 /* Resources */,
@@ -124,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				B58396DE29911D9C0046C484 /* CollectionView + cellId.swift */,
+				B5D039882995384E00C55E4E /* Ext SheetPresentation + Identifier.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -207,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B58396D22991121F0046C484 /* BottomSheetModel.swift in Sources */,
+				B5D039892995384E00C55E4E /* Ext SheetPresentation + Identifier.swift in Sources */,
 				B58396D6299117D40046C484 /* MockData.swift in Sources */,
 				B58396C0299111310046C484 /* BottomSheetViewController.swift in Sources */,
 				B58396BC299111310046C484 /* AppDelegate.swift in Sources */,
@@ -215,6 +222,7 @@
 				B5A5A73D299173FF00F710A3 /* SectionHeaderForOneRow.swift in Sources */,
 				B58396BE299111310046C484 /* SceneDelegate.swift in Sources */,
 				B5D039852993B95A00C55E4E /* MainScreenViewController.swift in Sources */,
+				B5D0398C2995394D00C55E4E /* SelectedDetent.swift in Sources */,
 				B58396DF29911D9C0046C484 /* CollectionView + cellId.swift in Sources */,
 				B5A5A73B299133F000F710A3 /* CreateLayout.swift in Sources */,
 			);
