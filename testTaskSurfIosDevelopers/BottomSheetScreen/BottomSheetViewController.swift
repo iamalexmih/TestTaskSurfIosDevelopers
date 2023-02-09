@@ -83,9 +83,12 @@ class BottomSheetViewController: UIViewController {
     }
     
     override func viewWillLayoutSubviews() {
-        ///prissss
-        collectionView.collectionViewLayout = createLayout.createCompositionalLayout(isLarge: true)
         
+        if SelectedDetent.current == .large {
+            collectionView.collectionViewLayout = createLayout.createCompositionalLayout(isLarge: true, detent: .large)
+        } else if SelectedDetent.current == .mediumId {
+            collectionView.collectionViewLayout = createLayout.createCompositionalLayout(isLarge: false, detent: .mediumId)
+        }
     }
 }
 
@@ -132,7 +135,7 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
     
     func setupCollectionView() {
         collectionView = UICollectionView(frame: .zero,
-                                          collectionViewLayout: createLayout.createCompositionalLayout(isLarge: false))
+                                          collectionViewLayout: createLayout.createCompositionalLayout(isLarge: false, detent: .smallId))
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .white
         

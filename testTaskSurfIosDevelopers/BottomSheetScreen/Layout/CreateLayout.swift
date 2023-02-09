@@ -9,21 +9,28 @@ import UIKit
 
 
 final class CreateLayout {
-    func createCompositionalLayout(isLarge: Bool) -> UICollectionViewLayout {
+    func createCompositionalLayout(isLarge: Bool, detent: UISheetPresentationController.Detent.Identifier) -> UICollectionViewLayout {
         let sectionProvider = { [weak self]
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
             guard let self = self else { return nil }
             let section = MockData.shared.getSections()[sectionIndex]
             
-            switch section.type {
-            case "OneRow":
-                return self.createOneRowSection()
-            default:
-                if isLarge {
-                    return self.createSectionList()
-                } else {
-                    return self.createTwoRowSection()
+            if detent == .smallId {
+                switch section.type {
+                default:
+                    return self.createOneRowSection()
+                }
+            } else {
+                switch section.type {
+                case "OneRow":
+                    return self.createOneRowSection()
+                default:
+                    if isLarge {
+                        return self.createSectionList()
+                    } else {
+                        return self.createTwoRowSection()
+                    }
                 }
             }
         }
