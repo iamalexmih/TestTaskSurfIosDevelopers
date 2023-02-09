@@ -12,6 +12,7 @@ final class CreateLayout {
     func createCompositionalLayout() -> UICollectionViewLayout {
         let sectionProvider = { [weak self]
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+            
             guard let self = self else { return nil }
             let section = MockData.shared.getSections()[sectionIndex]
             
@@ -59,14 +60,14 @@ final class CreateLayout {
     
     private func createTwoRowSection() -> NSCollectionLayoutSection {
         
-        let estimatedHeight: CGFloat = 1
-        let estimatedWidth: CGFloat = 1
+        let estimatedHeight: CGFloat = 24
+        let estimatedWidth: CGFloat = 55
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(estimatedWidth),
                                               heightDimension: .estimated(estimatedHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1),
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .estimated(1),
                                                                          heightDimension: .estimated(100)),
                                                        subitems: [item])
         group.interItemSpacing = .fixed(12)
@@ -77,6 +78,33 @@ final class CreateLayout {
                                                         bottom: 0,
                                                         trailing: 0)
         section.orthogonalScrollingBehavior = .none
+        section.interGroupSpacing = 12
+        
+        let header = createSectionHeader()
+        section.boundarySupplementaryItems = [header]
+        
+        return section
+    }
+    
+    private func createTwoRowSectionList() -> NSCollectionLayoutSection {
+        let estimatedHeight: CGFloat = 24
+        let estimatedWidth: CGFloat = 55
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(estimatedWidth),
+                                              heightDimension: .estimated(estimatedHeight))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .estimated(1),
+                                                                         heightDimension: .absolute(100)),
+                                                       subitems: [item])
+        group.interItemSpacing = .fixed(12)
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 12,
+                                                        leading: 20,
+                                                        bottom: 0,
+                                                        trailing: 0)
+        section.orthogonalScrollingBehavior = .paging
         section.interGroupSpacing = 12
         
         let header = createSectionHeader()

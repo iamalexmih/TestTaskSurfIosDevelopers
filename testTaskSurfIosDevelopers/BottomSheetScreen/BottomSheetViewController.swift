@@ -20,12 +20,11 @@ class BottomSheetViewController: UIViewController {
     
     var sections: [SectionModel] = []
     var createLayout: CreateLayout = CreateLayout()
-    var dataSourceDiffable: UICollectionViewDiffableDataSource<SectionModel, DirectionItems>?
     var numbItems = 10000
     private var collectionView: UICollectionView!
 
     
-    private let labelTitleA: UILabel = {
+    private let labelTitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Стажировка в Surf"
@@ -72,8 +71,6 @@ class BottomSheetViewController: UIViewController {
         sections = MockData.shared.getSections()
         
         setupCollectionView()
-//        createDataSource()
-        
         addSubviewOnView()
         setupConstraints()
     }
@@ -84,6 +81,11 @@ class BottomSheetViewController: UIViewController {
         let indexForReverseScroll = IndexPath(item: numbItems / 2, section: 0)
         collectionView.scrollToItem(at: indexForReverseScroll, at: .left, animated: false)
     }
+    
+//    override func viewWillLayoutSubviews() {
+//        print(view.frame.height)
+//        print(view.window?.windowScene?.screen.bounds.height ?? 100)
+//    }
 }
 
 
@@ -98,15 +100,14 @@ private extension BottomSheetViewController {
         bottomStackViewForRequest.addArrangedSubview(buttonSendRequest)
     
         view.addSubview(collectionView)
-        view.addSubview(labelTitleA)
+        view.addSubview(labelTitle)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            labelTitleA.topAnchor.constraint(equalTo: view.topAnchor, constant: 24),
-            labelTitleA.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            labelTitleA.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            
+            labelTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 24),
+            labelTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            labelTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
             buttonSendRequest.widthAnchor.constraint(equalToConstant: 220),
             
@@ -117,7 +118,7 @@ private extension BottomSheetViewController {
             
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: labelTitleA.bottomAnchor, constant: 10),
+            collectionView.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 10),
             collectionView.bottomAnchor.constraint(equalTo: bottomStackViewForRequest.topAnchor, constant: -10),
         ])
     }

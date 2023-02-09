@@ -21,7 +21,6 @@ class MainScreenViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(mainImage)
         setupConstraints()
-        //setupTapForShowSheet()
         configSheet()
         
     }
@@ -29,28 +28,29 @@ class MainScreenViewController: UIViewController {
     private func configSheet() {
         let sheetView = BottomSheetViewController()
         let navVC = UINavigationController(rootViewController: sheetView)
-        navVC.title = "123"
         navVC.isModalInPresentation = true
+        
+        let smallId = UISheetPresentationController.Detent.Identifier("small")
+        let smallDetent = UISheetPresentationController.Detent.custom(identifier: smallId) { context in
+           return 270
+        }
+        
+        let mediumId = UISheetPresentationController.Detent.Identifier("medium")
+        let mediumDetent = UISheetPresentationController.Detent.custom(identifier: mediumId) { context in
+           return 450
+        }
+        
+        
+        
         if let sheet = navVC.sheetPresentationController {
             sheet.preferredCornerRadius = 32
-            sheet.detents = [.medium(), .large()]
+            sheet.detents = [smallDetent , mediumDetent, .large()]
             sheet.largestUndimmedDetentIdentifier = .large
-            
         }
         
         navigationController?.present(navVC, animated: true)
     }
-    
-    
-    //MARK:  Tap for show sheet
-    private func setupTapForShowSheet() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(showBottomSheet))
-        view.addGestureRecognizer(tap)
-    }
 
-    @objc func showBottomSheet() {
-        configSheet()
-    }
 }
 
 
