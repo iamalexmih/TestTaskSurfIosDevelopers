@@ -42,7 +42,7 @@ final class CreateLayout {
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize,
                                                        subitems: [item])
-
+        
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 12,
                                                         leading: 20,

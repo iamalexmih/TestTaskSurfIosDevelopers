@@ -11,12 +11,13 @@ import UIKit
 final class DirecionCollectionViewCell: UICollectionViewCell {
     private var label: UILabel = {
        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+//        label.textColor = .black
+//        label.textAlignment = .center
+//        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         return label
     }()
+    
+    var section: Int = 1
     
     override var isSelected: Bool {
         didSet {
@@ -37,12 +38,17 @@ final class DirecionCollectionViewCell: UICollectionViewCell {
 }
 
 extension DirecionCollectionViewCell {
-    func setup(title: String) {
+    func setup(title: String, section: Int) {
         label.text = title
+        label.textColor = .black
         backgroundColor = UIColor(named: "colorCell")
         contentView.addSubview(label)
         layer.cornerRadius = 8
         clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        
+        self.section = section
         
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),

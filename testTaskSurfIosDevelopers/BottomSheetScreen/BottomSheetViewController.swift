@@ -77,6 +77,13 @@ class BottomSheetViewController: UIViewController {
         addSubviewOnView()
         setupConstraints()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let indexForReverseScroll = IndexPath(item: numbItems / 2, section: 0)
+        collectionView.scrollToItem(at: indexForReverseScroll, at: .left, animated: false)
+    }
 }
 
 
@@ -140,33 +147,37 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
         
     }
 
-
+    // MARK: Manage the data source
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         sections.count
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        sections[section].items.count
+        if section == 0 {
+            return numbItems
+        } else {
+            return sections[section].items.count
+        }
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         switch self.sections[indexPath.section].type {
         case "TwoRows":
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirecionCollectionViewCell.cellId,
                                                           for: indexPath) as! DirecionCollectionViewCell
-            cell.setup(title: sections[indexPath.section].items[indexPath.row].direction)
+            let item = sections[indexPath.section].items[indexPath.row]
+            cell.setup(title: item.direction, section: 1)
             cell.sizeToFit()
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirecionCollectionViewCell.cellId,
                                                           for: indexPath) as! DirecionCollectionViewCell
-            cell.setup(title: sections[indexPath.section].items[indexPath.row].direction)
+            let indexForCirlceScroll = indexPath.row % sections[indexPath.section].items.count
+            let item = sections[0].items[indexForCirlceScroll]
+            cell.setup(title: item.direction, section: 0)
             cell.sizeToFit()
-            
             return cell
         }
     }
@@ -185,42 +196,24 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
         }
     }
     
-    // MARK: - Manage the data source
-//
-//    func createDataSource() {
-//        dataSourceDiffable = UICollectionViewDiffableDataSource<SectionModel, DirectionItems>(
-//            collectionView: collectionView, cellProvider: { [weak self]
-//                collectionView, indexPath, item in
-//
-//                guard let self = self else { return nil }
-//                switch self.sections[indexPath.section].type {
-//                case "TwoRows":
-//                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirecionCollectionViewCell.cellId,
-//                                                                  for: indexPath) as! DirecionCollectionViewCell
-//                    cell.setup(title: item.direction)
-//                    cell.sizeToFit()
-//                    return cell
-//                default:
-//                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirecionCollectionViewCell.cellId,
-//                                                                  for: indexPath) as! DirecionCollectionViewCell
-//                    cell.setup(title: item.direction)
-//                    cell.sizeToFit()
-//
-//                    return cell
-//                }
-//        })
-//
-//        dataSourceDiffable?.supplementaryViewProvider = { [weak self]
-//            (collectionView, kind, indexPath) -> UICollectionReusableView? in
-//            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
-//                ofKind: kind,
-//                withReuseIdentifier: SectionHeaderForOneRow.reuseId,
-//                for: indexPath) as? SectionHeaderForOneRow else { return nil }
-//
-//            sectionHeader.configHeader(textHeader: self?.sections[indexPath.section].title)
-//            return sectionHeader
-//        }
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            let indexForCirlceScroll = indexPath.row % sections[indexPath.section].items.count
+            let removeItem = sections[indexPath.section].items.remove(at: indexForCirlceScroll)
+            sections[indexPath.section].items.insert(removeItem, at: 0)
+            let index = IndexPath(item: 0, section: indexPath.section)
+            collectionView.moveItem(at: indexPath, to: index)
+        }
+    }
+
+   
+    
+
+}
+
+
+extension BottomSheetViewController: UICollectionViewDelegateFlowLayout {
+    
 }
 
 // MARK: config collection view
