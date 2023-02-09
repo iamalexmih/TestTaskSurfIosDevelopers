@@ -83,7 +83,7 @@ class BottomSheetViewController: UIViewController {
     }
     
     override func viewWillLayoutSubviews() {
-        
+        ///pri
         collectionView.collectionViewLayout = createLayout.createCompositionalLayout(isLarge: true)
         
     }
