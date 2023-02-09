@@ -11,9 +11,9 @@ import UIKit
 final class DirecionCollectionViewCell: UICollectionViewCell {
     private var label: UILabel = {
        let label = UILabel()
-//        label.textColor = .black
-//        label.textAlignment = .center
-//        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         return label
     }()
     
@@ -21,6 +21,7 @@ final class DirecionCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
+            guard section == 0 else { return }
             if isSelected {
                 if label.textColor == .white {
                     backgroundColor = UIColor(named: "colorCell")

@@ -206,8 +206,9 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
             let indexForCirlceScroll = indexPath.row % sections[indexPath.section].items.count
             let removeItem = sections[indexPath.section].items.remove(at: indexForCirlceScroll)
             sections[indexPath.section].items.insert(removeItem, at: 0)
-            let index = IndexPath(item: 0, section: indexPath.section)
-            collectionView.moveItem(at: indexPath, to: index)
+            let indexNew = IndexPath(item: 0, section: indexPath.section)
+            collectionView.moveItem(at: indexPath, to: indexNew)
+            collectionView.selectItem(at: IndexPath(item: 0, section: 1), animated: true, scrollPosition: .centeredHorizontally)
         }
     }
 
