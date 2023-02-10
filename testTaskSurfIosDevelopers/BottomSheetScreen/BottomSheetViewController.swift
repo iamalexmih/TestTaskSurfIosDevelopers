@@ -16,8 +16,8 @@ protocol BottomSheetViewControllerProtocol: AnyObject {
 
 class BottomSheetViewController: UIViewController {
     
-    var viewModel: BottomSheetViewModelProtocol!
-    var createLayout: CreateLayout = CreateLayout()
+    private var viewModel: BottomSheetViewModelProtocol!
+    private var createLayout: CreateLayout = CreateLayout()
     private var collectionView: UICollectionView!
     
     private let labelTitle: UILabel = {

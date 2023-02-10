@@ -8,7 +8,7 @@
 import UIKit
 
 
-final class DirecionCollectionViewCell: UICollectionViewCell {
+class DirecionCollectionViewCell: UICollectionViewCell {
     private var label: UILabel = {
        let label = UILabel()
         label.textColor = .black
@@ -17,7 +17,7 @@ final class DirecionCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    var section: Int = 1
+    private var section: Int = 1
     
     
     override var isSelected: Bool {

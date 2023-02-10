@@ -8,7 +8,7 @@
 import UIKit
 
 
-final class CreateLayout {
+class CreateLayout {
     func createCompositionalLayout(isLarge: Bool, detent: UISheetPresentationController.Detent.Identifier) -> UICollectionViewLayout {
         let sectionProvider = { [weak self]
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
@@ -100,7 +100,7 @@ final class CreateLayout {
     }
         
     
-    func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+    private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .estimated(1))
         

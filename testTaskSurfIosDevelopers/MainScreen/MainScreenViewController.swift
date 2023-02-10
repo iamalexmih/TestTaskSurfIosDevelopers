@@ -9,7 +9,7 @@ import UIKit
 
 class MainScreenViewController: UIViewController {
 
-    let mainImage: UIImageView = {
+    private let mainImage: UIImageView = {
        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "mainImage")

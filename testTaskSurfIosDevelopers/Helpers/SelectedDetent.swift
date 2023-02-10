@@ -10,6 +10,5 @@ import UIKit
 
 class SelectedDetent {
     static var current = UISheetPresentationController.Detent.Identifier("small")
-    
     private init() { }
 }

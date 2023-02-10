@@ -13,7 +13,6 @@ class MockData {
     static let shared = MockData()
     private init() { }
     
-    
     private var directionItems: [DirectionItems] =  [
         DirectionItems(direction: "IOS"),
         DirectionItems(direction: "Android"),
@@ -45,8 +44,8 @@ class MockData {
     
     
     func getSections() -> [SectionModel] {
-        var oneSection = SectionModel(type: "OneRow", title: textOneHeader, items: directionItems)
-        var twoSection = SectionModel(type: "TwoRows", title: textTwoHeader, items: directionItemsTwo)
+        let oneSection = SectionModel(type: "OneRow", title: textOneHeader, items: directionItems)
+        let twoSection = SectionModel(type: "TwoRows", title: textTwoHeader, items: directionItemsTwo)
         
         return [oneSection, twoSection]
     }
