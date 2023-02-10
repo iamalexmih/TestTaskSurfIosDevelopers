@@ -16,16 +16,9 @@ protocol BottomSheetViewControllerProtocol: AnyObject {
 
 class BottomSheetViewController: UIViewController {
     
-    var viewModel: BottomSheetViewModelProtocol! {
-        didSet {
-            
-        }
-    }
-    
-    var mockData: [SectionModel] = []
+    var viewModel: BottomSheetViewModelProtocol!
     var createLayout: CreateLayout = CreateLayout()
     private var collectionView: UICollectionView!
-
     
     private let labelTitle: UILabel = {
         let label = UILabel()
@@ -35,7 +28,6 @@ class BottomSheetViewController: UIViewController {
         label.textColor = UIColor(named: "colorDark")
         return label
     }()
-    
     
     private let labelDoYouWant: UILabel = {
         let label = UILabel()
@@ -69,29 +61,21 @@ class BottomSheetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = BottomSheetViewModel()
-        
         view.backgroundColor = .white
-        
-        mockData = MockData.shared.getSections()
+
+        viewModel = BottomSheetViewModel()
         
         setupCollectionView()
         addSubviewOnView()
         setupConstraints()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         configReverseScrollForFirstCollectionView()
     }
     
-    func configReverseScrollForFirstCollectionView() {
-        collectionView.scrollToItem(at: viewModel.indexForReverseScroll, at: .left, animated: false)
-    }
-    
-    // TODO: обновление collectionView Не в главном поток, асинхронно
-    
+
     override func viewWillLayoutSubviews() {
         if SelectedDetent.current == .large {
             collectionView.collectionViewLayout = createLayout.createCompositionalLayout(isLarge: true, detent: .large)
@@ -99,6 +83,13 @@ class BottomSheetViewController: UIViewController {
         } else if SelectedDetent.current == .mediumId {
             collectionView.collectionViewLayout = createLayout.createCompositionalLayout(isLarge: false, detent: .mediumId)
             configReverseScrollForFirstCollectionView()
+        }
+    }
+    
+    
+    private func configReverseScrollForFirstCollectionView() {
+        DispatchQueue.main.async { [self] in
+            self.collectionView.scrollToItem(at: viewModel.indexForReverseScroll, at: .left, animated: false)
         }
     }
 }
@@ -117,6 +108,7 @@ private extension BottomSheetViewController {
         view.addSubview(collectionView)
         view.addSubview(labelTitle)
     }
+    
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
@@ -141,9 +133,10 @@ private extension BottomSheetViewController {
 
 
 
-// MARK: config collection view
 extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
+    // MARK: - config collection view
+
     func setupCollectionView() {
         collectionView = UICollectionView(frame: .zero,
                                           collectionViewLayout: createLayout.createCompositionalLayout(isLarge: false, detent: .smallId))
@@ -163,7 +156,8 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
         
     }
 
-    // MARK: Manage the data source
+    
+    // MARK: - Data source Collection View
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         viewModel.countSection
@@ -225,7 +219,7 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
 
 
 
-// MARK: config collection view
+// MARK: - config collection view
 private extension BottomSheetViewController {
     @objc func alertWindow() {
         let alert = UIAlertController(title: "Поздравляем!",
