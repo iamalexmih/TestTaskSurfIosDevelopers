@@ -19,24 +19,26 @@ final class DirecionCollectionViewCell: UICollectionViewCell {
     
     var section: Int = 1
     
+    
     override var isSelected: Bool {
         didSet {
             guard section == 0 else { return }
-            if isSelected {
-                if label.textColor == .white {
-                    backgroundColor = UIColor(named: "colorCell")
-                    label.textColor = .black
-                } else {
-                    backgroundColor = UIColor(named: "colorDark")
-                    label.textColor = .white
-                }
-            } else {
+            guard isSelected else {
                 backgroundColor = UIColor(named: "colorCell")
                 label.textColor = .black
+                return
+            }
+            if label.textColor == .white {
+                backgroundColor = UIColor(named: "colorCell")
+                label.textColor = .black
+            } else {
+                backgroundColor = UIColor(named: "colorDark")
+                label.textColor = .white
             }
         }
     }
 }
+
 
 extension DirecionCollectionViewCell {
     func setup(title: String, section: Int) {

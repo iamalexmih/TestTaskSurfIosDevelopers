@@ -15,17 +15,17 @@ class MockData {
     
     
     private var directionItems: [DirectionItems] =  [
-            DirectionItems(direction: "IOS"),
-            DirectionItems(direction: "Android"),
-            DirectionItems(direction: "Design"),
-            DirectionItems(direction: "QA"),
-            DirectionItems(direction: "Flutter"),
-            DirectionItems(direction: "Java"),
-            DirectionItems(direction: "Python"),
-            DirectionItems(direction: "Database (SQL)"),
-            DirectionItems(direction: "php"),
-            DirectionItems(direction: "DevOps")
-        ]
+        DirectionItems(direction: "IOS"),
+        DirectionItems(direction: "Android"),
+        DirectionItems(direction: "Design"),
+        DirectionItems(direction: "QA"),
+        DirectionItems(direction: "Flutter"),
+        DirectionItems(direction: "Java"),
+        DirectionItems(direction: "Python"),
+        DirectionItems(direction: "Database (SQL)"),
+        DirectionItems(direction: "php"),
+        DirectionItems(direction: "DevOps")
+    ]
     
     private var directionItemsTwo: [DirectionItems] =  [
         DirectionItems(direction: "IOS"),

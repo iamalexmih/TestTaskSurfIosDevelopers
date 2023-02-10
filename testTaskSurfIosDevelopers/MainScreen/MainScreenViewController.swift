@@ -17,30 +17,27 @@ class MainScreenViewController: UIViewController {
         return imageView
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(mainImage)
         setupConstraints()
         configSheet()
-        
     }
+    
  
     private func configSheet() {
         let sheetView = BottomSheetViewController()
         let navVC = UINavigationController(rootViewController: sheetView)
         navVC.isModalInPresentation = true
         
-//        let smallId = UISheetPresentationController.Detent.Identifier("small")
         let smallDetent = UISheetPresentationController.Detent.custom(identifier: .smallId) { context in
            return 270
         }
         
-//        let mediumId = UISheetPresentationController.Detent.Identifier("medium")
         let mediumDetent = UISheetPresentationController.Detent.custom(identifier: .mediumId) { context in
            return 450
         }
-        
-        
         
         if let sheet = navVC.sheetPresentationController {
             sheet.preferredCornerRadius = 32
@@ -53,6 +50,8 @@ class MainScreenViewController: UIViewController {
     }
 }
 
+
+// MARK: - Sheet Presentation Controller Delegate
 extension MainScreenViewController: UISheetPresentationControllerDelegate {
     func sheetPresentationControllerDidChangeSelectedDetentIdentifier(_ sheetPresentationController: UISheetPresentationController) {
         if sheetPresentationController.selectedDetentIdentifier == .large {
@@ -66,7 +65,7 @@ extension MainScreenViewController: UISheetPresentationControllerDelegate {
 }
 
 
-
+// MARK: - setupConstraints
 extension MainScreenViewController {
     private func setupConstraints() {
         NSLayoutConstraint.activate([

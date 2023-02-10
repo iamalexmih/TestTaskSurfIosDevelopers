@@ -26,15 +26,10 @@ final class CreateLayout {
                 case "OneRow":
                     return self.createOneRowSection()
                 default:
-                    if isLarge {
-                        return self.createSectionList()
-                    } else {
-                        return self.createTwoRowSection()
-                    }
+                    return self.createSectionAdditional(isList: isLarge)
                 }
             }
         }
-        
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 24
         let layout = UICollectionViewCompositionalLayout(sectionProvider: sectionProvider,
@@ -69,60 +64,41 @@ final class CreateLayout {
         return section
     }
     
-    private func createSectionList() -> NSCollectionLayoutSection {
-        
-        let estimatedHeight: CGFloat = 24
-        let estimatedWidth: CGFloat = 55
-        
-        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(estimatedWidth),
-                                              heightDimension: .estimated(estimatedHeight))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                                                         heightDimension: .estimated(100)),
-                                                       subitems: [item])
-        group.interItemSpacing = .fixed(12)
-
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 12,
-                                                        leading: 20,
-                                                        bottom: 0,
-                                                        trailing: 0)
-        section.orthogonalScrollingBehavior = .none
-        section.interGroupSpacing = 12
-        
-        let header = createSectionHeader()
-        section.boundarySupplementaryItems = [header]
-        
-        return section
-    }
     
-    private func createTwoRowSection() -> NSCollectionLayoutSection {
+    private func createSectionAdditional(isList: Bool) -> NSCollectionLayoutSection {
         let estimatedHeight: CGFloat = 24
         let estimatedWidth: CGFloat = 55
-        
         let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(estimatedWidth),
                                               heightDimension: .estimated(estimatedHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .estimated(1),
+        var group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .estimated(1),
                                                                          heightDimension: .absolute(100)),
                                                        subitems: [item])
+       
+        if isList {
+            group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1),
+                                                                         heightDimension: .estimated(100)),
+                                                       subitems: [item])
+        }
+        
         group.interItemSpacing = .fixed(12)
-
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 12,
                                                         leading: 20,
                                                         bottom: 0,
                                                         trailing: 0)
         section.orthogonalScrollingBehavior = .paging
-        section.interGroupSpacing = 12
         
+        if isList {
+            section.orthogonalScrollingBehavior = .none
+        }
+        
+        section.interGroupSpacing = 12
         let header = createSectionHeader()
         section.boundarySupplementaryItems = [header]
-        
         return section
     }
+        
     
     func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),

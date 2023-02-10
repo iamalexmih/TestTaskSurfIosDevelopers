@@ -15,12 +15,15 @@ protocol BottomSheetViewControllerProtocol: AnyObject {
 
 
 class BottomSheetViewController: UIViewController {
-
-    var presenter: PresenterProtocol!
     
-    var sections: [SectionModel] = []
+    var viewModel: BottomSheetViewModelProtocol! {
+        didSet {
+            
+        }
+    }
+    
+    var mockData: [SectionModel] = []
     var createLayout: CreateLayout = CreateLayout()
-    var numbItems = 10000
     private var collectionView: UICollectionView!
 
     
@@ -66,9 +69,11 @@ class BottomSheetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = BottomSheetViewModel()
+        
         view.backgroundColor = .white
         
-        sections = MockData.shared.getSections()
+        mockData = MockData.shared.getSections()
         
         setupCollectionView()
         addSubviewOnView()
@@ -78,16 +83,22 @@ class BottomSheetViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let indexForReverseScroll = IndexPath(item: numbItems / 2, section: 0)
-        collectionView.scrollToItem(at: indexForReverseScroll, at: .left, animated: false)
+        configReverseScrollForFirstCollectionView()
     }
     
+    func configReverseScrollForFirstCollectionView() {
+        collectionView.scrollToItem(at: viewModel.indexForReverseScroll, at: .left, animated: false)
+    }
+    
+    // TODO: обновление collectionView Не в главном поток, асинхронно
+    
     override func viewWillLayoutSubviews() {
-        
         if SelectedDetent.current == .large {
             collectionView.collectionViewLayout = createLayout.createCompositionalLayout(isLarge: true, detent: .large)
+            configReverseScrollForFirstCollectionView()
         } else if SelectedDetent.current == .mediumId {
             collectionView.collectionViewLayout = createLayout.createCompositionalLayout(isLarge: false, detent: .mediumId)
+            configReverseScrollForFirstCollectionView()
         }
     }
 }
@@ -155,32 +166,32 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
     // MARK: Manage the data source
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        sections.count
+        viewModel.countSection
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-            return numbItems
+            return viewModel.countItemsForSircle
         } else {
-            return sections[section].items.count
+            return viewModel.itemCount(section)
         }
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch self.sections[indexPath.section].type {
+        switch self.mockData[indexPath.section].type {
         case "TwoRows":
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirecionCollectionViewCell.cellId,
                                                           for: indexPath) as! DirecionCollectionViewCell
-            let item = sections[indexPath.section].items[indexPath.row]
+            let item = mockData[indexPath.section].items[indexPath.row]
             cell.setup(title: item.direction, section: 1)
             cell.sizeToFit()
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirecionCollectionViewCell.cellId,
                                                           for: indexPath) as! DirecionCollectionViewCell
-            let indexForCirlceScroll = indexPath.row % sections[indexPath.section].items.count
-            let item = sections[0].items[indexForCirlceScroll]
+            let indexForCirlceScroll = indexPath.row % mockData[indexPath.section].items.count
+            let item = mockData[0].items[indexForCirlceScroll]
             cell.setup(title: item.direction, section: 0)
             cell.sizeToFit()
             return cell
@@ -194,7 +205,7 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
             let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                                                                          withReuseIdentifier: SectionHeaderForOneRow.reuseId,
                                                                          for: indexPath) as! SectionHeaderForOneRow
-            sectionHeader.configHeader(textHeader: self.sections[indexPath.section].title)
+            sectionHeader.configHeader(textHeader: self.mockData[indexPath.section].title)
             return sectionHeader
         default:
             return UICollectionReusableView()
@@ -203,29 +214,24 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            let indexForCirlceScroll = indexPath.row % sections[indexPath.section].items.count
-            let removeItem = sections[indexPath.section].items.remove(at: indexForCirlceScroll)
-            sections[indexPath.section].items.insert(removeItem, at: 0)
+            let indexForCirlceScroll = indexPath.row % mockData[indexPath.section].items.count
+            let removeItem = mockData[indexPath.section].items.remove(at: indexForCirlceScroll)
+            mockData[indexPath.section].items.insert(removeItem, at: 0)
             let indexNew = IndexPath(item: 0, section: indexPath.section)
             collectionView.moveItem(at: indexPath, to: indexNew)
             collectionView.selectItem(at: IndexPath(item: 0, section: 1), animated: true, scrollPosition: .centeredHorizontally)
         }
     }
-
-   
-    
-
 }
 
 
-extension BottomSheetViewController: UICollectionViewDelegateFlowLayout {
-    
-}
 
 // MARK: config collection view
 private extension BottomSheetViewController {
     @objc func alertWindow() {
-        let alert = UIAlertController(title: "Поздравляем!", message: "Ваша заявка успешно отправлена!", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Поздравляем!",
+                                      message: "Ваша заявка успешно отправлена!",
+                                      preferredStyle: .alert)
         let closeAction = UIAlertAction(title: "Закрыть", style: .default)
         alert.addAction(closeAction)
         present(alert, animated: true)

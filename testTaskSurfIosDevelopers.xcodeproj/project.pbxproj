@@ -12,7 +12,7 @@
 		B58396C0299111310046C484 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58396BF299111310046C484 /* BottomSheetViewController.swift */; };
 		B58396C5299111320046C484 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B58396C4299111320046C484 /* Assets.xcassets */; };
 		B58396C8299111320046C484 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B58396C6299111320046C484 /* LaunchScreen.storyboard */; };
-		B58396D02991121A0046C484 /* BottomSheetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58396CF2991121A0046C484 /* BottomSheetPresenter.swift */; };
+		B58396D02991121A0046C484 /* BottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58396CF2991121A0046C484 /* BottomSheetViewModel.swift */; };
 		B58396D22991121F0046C484 /* BottomSheetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58396D12991121F0046C484 /* BottomSheetModel.swift */; };
 		B58396D6299117D40046C484 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58396D5299117D40046C484 /* MockData.swift */; };
 		B58396DC29911CA80046C484 /* DirecionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58396DB29911CA80046C484 /* DirecionCollectionViewCell.swift */; };
@@ -32,7 +32,7 @@
 		B58396C4299111320046C484 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B58396C7299111320046C484 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B58396C9299111320046C484 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B58396CF2991121A0046C484 /* BottomSheetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetPresenter.swift; sourceTree = "<group>"; };
+		B58396CF2991121A0046C484 /* BottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewModel.swift; sourceTree = "<group>"; };
 		B58396D12991121F0046C484 /* BottomSheetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetModel.swift; sourceTree = "<group>"; };
 		B58396D5299117D40046C484 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		B58396DB29911CA80046C484 /* DirecionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirecionCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -76,10 +76,10 @@
 			children = (
 				B58396BB299111310046C484 /* AppDelegate.swift */,
 				B58396BD299111310046C484 /* SceneDelegate.swift */,
-				B58396D3299112250046C484 /* BottomSheetScreen */,
-				B58396D5299117D40046C484 /* MockData.swift */,
-				B5D0398B2995394D00C55E4E /* SelectedDetent.swift */,
 				B5D039832993B94500C55E4E /* MainScreen */,
+				B58396D3299112250046C484 /* BottomSheetScreen */,
+				B5EAD6782995453400DE47DC /* Data */,
+				B5EAD6772995452400DE47DC /* Helpers */,
 				B58396DD29911D820046C484 /* Extension */,
 				B58396D42991123D0046C484 /* Resources */,
 			);
@@ -92,7 +92,7 @@
 				B58396DA29911C8F0046C484 /* Cell */,
 				B58396D729911C3A0046C484 /* Layout */,
 				B58396BF299111310046C484 /* BottomSheetViewController.swift */,
-				B58396CF2991121A0046C484 /* BottomSheetPresenter.swift */,
+				B58396CF2991121A0046C484 /* BottomSheetViewModel.swift */,
 				B58396D12991121F0046C484 /* BottomSheetModel.swift */,
 			);
 			path = BottomSheetScreen;
@@ -140,6 +140,22 @@
 				B5D039842993B95A00C55E4E /* MainScreenViewController.swift */,
 			);
 			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		B5EAD6772995452400DE47DC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B5D0398B2995394D00C55E4E /* SelectedDetent.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B5EAD6782995453400DE47DC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B58396D5299117D40046C484 /* MockData.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,7 +233,7 @@
 				B58396D6299117D40046C484 /* MockData.swift in Sources */,
 				B58396C0299111310046C484 /* BottomSheetViewController.swift in Sources */,
 				B58396BC299111310046C484 /* AppDelegate.swift in Sources */,
-				B58396D02991121A0046C484 /* BottomSheetPresenter.swift in Sources */,
+				B58396D02991121A0046C484 /* BottomSheetViewModel.swift in Sources */,
 				B58396DC29911CA80046C484 /* DirecionCollectionViewCell.swift in Sources */,
 				B5A5A73D299173FF00F710A3 /* SectionHeaderForOneRow.swift in Sources */,
 				B58396BE299111310046C484 /* SceneDelegate.swift in Sources */,
