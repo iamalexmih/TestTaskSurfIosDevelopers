@@ -15,42 +15,59 @@ protocol BottomSheetViewModelProtocol: AnyObject {
     
     func itemCount(_ section: Int) -> Int
     func typeSection(_ section: Int) -> String
-    func getItemTitle(_ section: Int, _ row: Int) -> String
+    func getItemTitle(_ section: Int, _ row: Int, circleScroll: Bool) -> String
     func getHeaderTitle(_ section: Int) -> String
+    func moveItemToBeginning(_ indexPath: IndexPath)
 }
 
 
 class BottomSheetViewModel: BottomSheetViewModelProtocol {
-    private let mockData: [SectionModel]
+    private var mockData: [SectionModel]
 
     var countItemsForSircle: Int = 10_000
     var indexForReverseScroll: IndexPath {
         IndexPath(item: countItemsForSircle / 2, section: 0)
     }
     
+    
     var countSection: Int {
         mockData.count
     }
     
-    func itemCount(_ section: Int) -> Int {
-        mockData[section].items.count
-    }
-    
-    func typeSection(_ section: Int) -> String {
-        mockData[section].type
-    }
-    
-    func getItemTitle(_ section: Int, _ row: Int) -> String {
-        mockData[section].items[row].direction
-    }
-    
-    func getHeaderTitle(_ section: Int) -> String {
-        mockData[section].title
-    }
     
     required init() {
         self.mockData = MockData.shared.getSections()
     }
     
     
+    func itemCount(_ section: Int) -> Int {
+        mockData[section].items.count
+    }
+    
+    
+    func typeSection(_ section: Int) -> String {
+        mockData[section].type
+    }
+    
+    
+    func getItemTitle(_ section: Int, _ row: Int, circleScroll: Bool) -> String {
+        if circleScroll {
+            let indexRowForCirlceScroll = row % itemCount(section)
+            return mockData[section].items[indexRowForCirlceScroll].direction
+        } else {
+            return mockData[section].items[row].direction
+        }
+    }
+    
+    
+    func getHeaderTitle(_ section: Int) -> String {
+        mockData[section].title
+    }
+    
+    
+    func moveItemToBeginning(_ indexPath: IndexPath) {
+        let currentIndex = indexPath.row % mockData[indexPath.section].items.count
+        let removeItem = mockData[indexPath.section].items.remove(at: currentIndex)
+        mockData[indexPath.section].items.insert(removeItem, at: 0)
+    }
 }

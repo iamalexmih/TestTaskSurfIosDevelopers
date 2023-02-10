@@ -184,16 +184,14 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
         case "TwoRows":
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirecionCollectionViewCell.cellId,
                                                           for: indexPath) as! DirecionCollectionViewCell
-            let itemTitle = viewModel.getItemTitle(section, indexPath.row)
+            let itemTitle = viewModel.getItemTitle(section, indexPath.row, circleScroll: false)
             cell.configure(itemTitle, section)
             cell.sizeToFit()
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirecionCollectionViewCell.cellId,
                                                           for: indexPath) as! DirecionCollectionViewCell
-            
-            let indexRowForCirlceScroll = indexPath.row % viewModel.itemCount(section)
-            let itemTitle = viewModel.getItemTitle(section, indexRowForCirlceScroll)
+            let itemTitle = viewModel.getItemTitle(section, indexPath.row, circleScroll: true)
             cell.configure(itemTitle, section)
             cell.sizeToFit()
             return cell
@@ -214,13 +212,12 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
         }
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            let indexForCirlceScroll = indexPath.row % mockData[indexPath.section].items.count
-            let removeItem = mockData[indexPath.section].items.remove(at: indexForCirlceScroll)
-            mockData[indexPath.section].items.insert(removeItem, at: 0)
-            let indexNew = IndexPath(item: 0, section: indexPath.section)
-            collectionView.moveItem(at: indexPath, to: indexNew)
+            viewModel.moveItemToBeginning(indexPath)
+            let indexZero = IndexPath(item: 0, section: indexPath.section)
+            collectionView.moveItem(at: indexPath, to: indexZero)
             collectionView.selectItem(at: IndexPath(item: 0, section: 1), animated: true, scrollPosition: .centeredHorizontally)
         }
     }
