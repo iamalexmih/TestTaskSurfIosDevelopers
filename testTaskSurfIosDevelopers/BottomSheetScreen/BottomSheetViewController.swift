@@ -88,8 +88,9 @@ class BottomSheetViewController: UIViewController {
     
     
     private func configReverseScrollForFirstCollectionView() {
-        DispatchQueue.main.async { [self] in
-            self.collectionView.scrollToItem(at: viewModel.indexForReverseScroll, at: .left, animated: false)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.collectionView.scrollToItem(at: self.viewModel.indexForReverseScroll, at: .left, animated: false)
         }
     }
 }
