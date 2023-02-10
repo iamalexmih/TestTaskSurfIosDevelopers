@@ -41,7 +41,7 @@ final class DirecionCollectionViewCell: UICollectionViewCell {
 
 
 extension DirecionCollectionViewCell {
-    func setup(title: String, section: Int) {
+    func configure(_ title: String, _ section: Int) {
         label.text = title
         label.textColor = .black
         backgroundColor = UIColor(named: "colorCell")

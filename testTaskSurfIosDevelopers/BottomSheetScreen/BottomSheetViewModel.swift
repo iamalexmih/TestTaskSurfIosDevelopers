@@ -14,6 +14,9 @@ protocol BottomSheetViewModelProtocol: AnyObject {
     var countSection: Int { get }
     
     func itemCount(_ section: Int) -> Int
+    func typeSection(_ section: Int) -> String
+    func getItemTitle(_ section: Int, _ row: Int) -> String
+    func getHeaderTitle(_ section: Int) -> String
 }
 
 
@@ -31,6 +34,18 @@ class BottomSheetViewModel: BottomSheetViewModelProtocol {
     
     func itemCount(_ section: Int) -> Int {
         mockData[section].items.count
+    }
+    
+    func typeSection(_ section: Int) -> String {
+        mockData[section].type
+    }
+    
+    func getItemTitle(_ section: Int, _ row: Int) -> String {
+        mockData[section].items[row].direction
+    }
+    
+    func getHeaderTitle(_ section: Int) -> String {
+        mockData[section].title
     }
     
     required init() {

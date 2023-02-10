@@ -179,20 +179,22 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch self.mockData[indexPath.section].type {
+        let section = indexPath.section
+        switch viewModel.typeSection(section) {
         case "TwoRows":
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirecionCollectionViewCell.cellId,
                                                           for: indexPath) as! DirecionCollectionViewCell
-            let item = mockData[indexPath.section].items[indexPath.row]
-            cell.setup(title: item.direction, section: 1)
+            let itemTitle = viewModel.getItemTitle(section, indexPath.row)
+            cell.configure(itemTitle, section)
             cell.sizeToFit()
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirecionCollectionViewCell.cellId,
                                                           for: indexPath) as! DirecionCollectionViewCell
-            let indexForCirlceScroll = indexPath.row % mockData[indexPath.section].items.count
-            let item = mockData[0].items[indexForCirlceScroll]
-            cell.setup(title: item.direction, section: 0)
+            
+            let indexRowForCirlceScroll = indexPath.row % viewModel.itemCount(section)
+            let itemTitle = viewModel.getItemTitle(section, indexRowForCirlceScroll)
+            cell.configure(itemTitle, section)
             cell.sizeToFit()
             return cell
         }
@@ -205,7 +207,7 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
             let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                                                                          withReuseIdentifier: SectionHeaderForOneRow.reuseId,
                                                                          for: indexPath) as! SectionHeaderForOneRow
-            sectionHeader.configHeader(textHeader: self.mockData[indexPath.section].title)
+            sectionHeader.configHeader(textHeader: viewModel.getHeaderTitle(indexPath.section))
             return sectionHeader
         default:
             return UICollectionReusableView()
