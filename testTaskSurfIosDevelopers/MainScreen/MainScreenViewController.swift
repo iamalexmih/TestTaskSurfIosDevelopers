@@ -8,9 +8,9 @@
 import UIKit
 
 class MainScreenViewController: UIViewController {
-
+    
     private let mainImage: UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "mainImage")
         imageView.contentMode = .scaleAspectFill
@@ -25,18 +25,18 @@ class MainScreenViewController: UIViewController {
         configSheet()
     }
     
- 
+    
     private func configSheet() {
         let sheetView = BottomSheetViewController()
         let navVC = UINavigationController(rootViewController: sheetView)
         navVC.isModalInPresentation = true
         
         let smallDetent = UISheetPresentationController.Detent.custom(identifier: .smallId) { context in
-           return 270
+            return 270
         }
         
         let mediumDetent = UISheetPresentationController.Detent.custom(identifier: .mediumId) { context in
-           return 450
+            return 450
         }
         
         if let sheet = navVC.sheetPresentationController {
@@ -48,6 +48,14 @@ class MainScreenViewController: UIViewController {
         
         navigationController?.present(navVC, animated: true)
     }
+    
+    
+    func animateMainImage(x: CGFloat, y: CGFloat) {
+        UIView.animate(withDuration: 0.5) { [weak self] in
+            guard let self = self else { return }
+            self.mainImage.frame = CGRect(x: x, y: y, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        }
+    }
 }
 
 
@@ -57,8 +65,10 @@ extension MainScreenViewController: UISheetPresentationControllerDelegate {
         if sheetPresentationController.selectedDetentIdentifier == .large {
             SelectedDetent.current = .large
         } else if sheetPresentationController.selectedDetentIdentifier == .mediumId {
+            self.animateMainImage(x: 0, y: -200)
             SelectedDetent.current = .mediumId
         } else {
+            self.animateMainImage(x: 0, y: 0)
             SelectedDetent.current = .smallId
         }
     }
@@ -69,10 +79,10 @@ extension MainScreenViewController: UISheetPresentationControllerDelegate {
 extension MainScreenViewController {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            mainImage.topAnchor.constraint(equalTo: view.topAnchor),
+            mainImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
             mainImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             mainImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            mainImage.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            mainImage.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         ])
     }
 }

@@ -194,6 +194,13 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if viewModel.calculateCounterForCircleScroll(indexPath) {
+            collectionView.reloadData()
+        }
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
