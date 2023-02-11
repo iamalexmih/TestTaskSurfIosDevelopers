@@ -83,6 +83,7 @@ class BottomSheetViewController: UIViewController {
         } else if SelectedDetent.current == .mediumId {
             collectionView.collectionViewLayout = createLayout.createCompositionalLayout(isLarge: false, detent: .mediumId)
             configReverseScrollForFirstCollectionView()
+            collectionView.reloadData()
         }
     }
     
