@@ -24,7 +24,7 @@ protocol BottomSheetViewModelProtocol: AnyObject {
 
 class BottomSheetViewModel: BottomSheetViewModelProtocol {
     private var mockData: [SectionModel]
-
+    
     var countItemsForSircle: Int = 400
     var indexForReverseScroll: IndexPath {
         IndexPath(item: countItemsForSircle / 2, section: 0)

@@ -62,7 +62,7 @@ class BottomSheetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
+        
         viewModel = BottomSheetViewModel()
         
         setupCollectionView()
@@ -75,7 +75,7 @@ class BottomSheetViewController: UIViewController {
         configReverseScrollForFirstCollectionView()
     }
     
-
+    
     override func viewWillLayoutSubviews() {
         if SelectedDetent.current == .large {
             collectionView.collectionViewLayout = createLayout.createCompositionalLayout(isLarge: true, detent: .large)
@@ -105,7 +105,7 @@ private extension BottomSheetViewController {
         
         bottomStackViewForRequest.addArrangedSubview(labelDoYouWant)
         bottomStackViewForRequest.addArrangedSubview(buttonSendRequest)
-    
+        
         view.addSubview(collectionView)
         view.addSubview(labelTitle)
     }
@@ -137,7 +137,7 @@ private extension BottomSheetViewController {
 extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     // MARK: - config collection view
-
+    
     func setupCollectionView() {
         collectionView = UICollectionView(frame: .zero,
                                           collectionViewLayout: createLayout.createCompositionalLayout(isLarge: false, detent: .smallId))
@@ -156,7 +156,7 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
                                 withReuseIdentifier: SectionHeaderForOneRow.reuseId)
         
     }
-
+    
     
     // MARK: - Data source Collection View
     
@@ -205,8 +205,8 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                         withReuseIdentifier: SectionHeaderForOneRow.reuseId,
-                                                                         for: indexPath) as! SectionHeaderForOneRow
+                                                                                withReuseIdentifier: SectionHeaderForOneRow.reuseId,
+                                                                                for: indexPath) as! SectionHeaderForOneRow
             sectionHeader.configHeader(textHeader: viewModel.getHeaderTitle(indexPath.section))
             return sectionHeader
         default:

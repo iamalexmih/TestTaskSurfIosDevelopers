@@ -72,9 +72,9 @@ class CreateLayout {
                                               heightDimension: .estimated(estimatedHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         var group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .estimated(1),
-                                                                         heightDimension: .absolute(100)),
-                                                       subitems: [item])
-       
+                                                                       heightDimension: .absolute(100)),
+                                                     subitems: [item])
+        
         if isList {
             group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                                          heightDimension: .estimated(100)),
@@ -98,7 +98,7 @@ class CreateLayout {
         section.boundarySupplementaryItems = [header]
         return section
     }
-        
+    
     
     private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
@@ -110,9 +110,9 @@ class CreateLayout {
             alignment: .top)
         
         layoutSectionHeader.contentInsets = NSDirectionalEdgeInsets(top: 0,
-                                                                     leading: 0,
-                                                                     bottom: 0,
-                                                                     trailing: 12)
+                                                                    leading: 0,
+                                                                    bottom: 0,
+                                                                    trailing: 12)
         return layoutSectionHeader
     }
 }

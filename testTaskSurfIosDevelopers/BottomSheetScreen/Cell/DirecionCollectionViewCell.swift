@@ -10,7 +10,7 @@ import UIKit
 
 class DirecionCollectionViewCell: UICollectionViewCell {
     private var label: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.textColor = .black
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
