@@ -19,8 +19,13 @@
 - В дополнительной карусели добавить возможность скроллить контент, если на экран не поместились все элементы, которые в нее добавлены. Количество рядов должно остаться так же равным двум. Скроллится должны сразу оба ряда, а не по отдельности.
     
 
+https://user-images.githubusercontent.com/101125278/218309208-b0d3e632-76b8-410c-9321-8f25da66e025.mov
 
 <p align="center">
 <img src="https://github.com/iamalexmih/TestTaskSurfIosDevelopers/blob/main/media%20resource/screenshots%20main%20screen%20App.png" 
 alt="screenshots main Screen App" width="600" />
 </p>
+
+
+
+
